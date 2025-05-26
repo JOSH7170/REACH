@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACH - Catálogo Ofertas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos personalizados */
+        :root {
+            --reach-primary: #000000;
+            --reach-secondary: #b12111; /* Rojo oscuro para efectos hover */
+            --reach-light: #ecf0f1;
+        }
+        
+        body {
+            background-color: rgb(255, 255, 255);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* NAVBAR - Efecto hover rojo */
+        .navbar-brand {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 1.8rem;
+            transition: color 0.3s;
+            position: relative;
+            display: inline-block;
+        }
+
+        #main-logo {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .navbar-brand:hover #main-logo {
+            filter: 
+                brightness(1.2)
+                sepia(1)
+                hue-rotate(330deg)
+                saturate(0)
+                drop-shadow(0 0 5px rgb(255, 255, 255));
+            transform: scale(1.05);
+        }
+
+        .navbar-brand:hover {
+            color: var(--reach-secondary) !important;
+        }
+        
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 670;
+            text-transform: uppercase;
+            font-size: 1.94rem;
+             margin-right: 60px;
+             margin-left: 40px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--reach-secondary) !important;
+        }
+        
+        .nav-link i {
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover i {
+            color: var(--reach-secondary) !important;
+        }
+        
+        /* Banner simplificado sin video */
+        .banner-catalog {
+            height: 300px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                              url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .banner-catalog h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--reach-primary);
+        }
+        
+        /* Filtros de búsqueda */
+        .filter-section {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--reach-primary);
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--reach-primary);
+        }
+        
+        .form-check-label {
+            cursor: pointer;
+        }
+        
+        /* Estilos para productos */
+        .sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--reach-secondary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .product-card {
+            transition: transform 0.3s;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            background-color: #0000002a;
+        }
+        
+        .card-title {
+            color: #000000;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .product-card:hover .card-title {
+            color: var(--reach-secondary);
+        }
+        
+        /* Sección newsletter */
+        .newsletter {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 3rem 0;
+            margin: 3rem 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--reach-primary);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--reach-secondary);
+        }
+        
+        .footer-links a {
+            color: var(--reach-light);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--reach-secondary);
+            text-decoration: underline;
+        }
+        
+        /* Efecto hover para botones */
+        .btn-outline-primary {
+            background-color: white;
+            border-color:#ffffff;
+            color: black;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--reach-secondary);
+            border-color:var(--reach-secondary);
+            color: rgb(255, 255, 255) !important;
+        }
+        
+        /* Estilos para el breadcrumb */
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0.75rem 0;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--reach-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--reach-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+        <div class="container">
+            <!-- Logo/Marca -->
+             
+            <a class="navbar-brand" href="index.html" style="transform: translateX(-15px); margin-right: 0 !important;">
+
+            
+               <img src="/images/reach.png" alt="Logo REACH" id="main-logo" class="logo-normal" style="height: 100px; width: auto;">
+                </a>
+            
+            
+            <!- Botón para menú en móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Menú de navegación - Solo zapatos -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                   
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="index1.html">HOMBRES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index2.html">Mujeres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index3.html">OFERTAS</a>
+                    </li>
+                </ul>
+
+                <!-- Barra de búsqueda mejorada -->
+                    <div class="nav-link" style="transition: all 0.3s ease;">
+                        <form class="d-flex">
+                            <div class="input-group search-group">
+                                <input type="text" class="form-control search-input bg-transparent text-white border-0 border-bottom rounded-0" 
+                                       placeholder="" 
+                                       style="width: 180px;
+                                        border-color: #ffffff !important;">
+                                <button class="btn btn-link search-btn" type="submit" style="color: #ffffff;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                     <!-- Iconos de usuario y carrito -->
+                <div class="d-flex">
+                    <a href="index5.html" class="nav-link text-white mx-2"><i class="fas fa-user"></i></a>
+                    <a href="index4.html" class="nav-link text-white mx-2"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+    
+    <!-- Banner simplificado sin video -->
+    <header class="banner-catalog">
+        <div class="container">
+            <h1></h1>
+        </div>
+    </header>
+
+    <!-- Sección principal de productos -->
+    <main class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">OFERTAS</li>
+            </ol>
+        </nav>
+        
+        <div class="row">
+            <!-- Columna de filtros -->
+            <div class="col-md-3">
+                <div class="filter-section">
+                    <h4 class="filter-title">FILTRAR POR</h4>
+                    
+                    <!-- Filtro por talla -->
+                    <div class="filter-group">
+                        <h5>TALLA</h5>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size38">
+                                    <label class="form-check-label" for="size38">38</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size39">
+                                    <label class="form-check-label" for="size39">39</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size40">
+                                    <label class="form-check-label" for="size40">40</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size41">
+                                    <label class="form-check-label" for="size41">41</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size42" checked>
+                                    <label class="form-check-label" for="size42">42</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size43">
+                                    <label class="form-check-label" for="size43">43</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size44">
+                                    <label class="form-check-label" for="size44">44</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size45">
+                                    <label class="form-check-label" for="size45">45</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="size46">
+                                    <label class="form-check-label" for="size46">46</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtro por precio -->
+                    <div class="filter-group">
+                        <h5>PRECIO</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="priceRange" id="priceAll" checked>
+                            <label class="form-check-label" for="priceAll">
+                                Todos los precios
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="priceRange" id="priceUnder200">
+                            <label class="form-check-label" for="priceUnder200">
+                                Menos de $200,000
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="priceRange" id="price200to300">
+                            <label class="form-check-label" for="price200to300">
+                                $200,000 - $300,000
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="priceRange" id="priceOver300">
+                            <label class="form-check-label" for="priceOver300">
+                                Más de $300,000
+                            </label>
+                        </div>
+                    </div>
+                    
+                   
+                    
+                    <button class="btn btn-dark w-100 mt-3">Aplicar Filtros</button>
+                    <button class="btn btn-outline-secondary w-100 mt-2">Limpiar Filtros</button>
+                </div>
+            </div>
+            
+            <!-- Columna de productos -->
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">ZAPATOS EN OFERTA</h2>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown">
+                            Ordenar por: Destacados
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Destacados</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: Menor a mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Precio: Mayor a menor</a></li>
+                            <li><a class="dropdown-item" href="#">Más nuevos</a></li>
+                            <li><a class="dropdown-item" href="#">Más vendidos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!-- Producto 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <span class="sale-badge">50%</span>
+                            <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80" class="card-img-top product-img" alt="REACH Run Pro">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH Run Pro</h5>
+                                <p class="card-text text-danger fw-bold">$279,900 <span class="text-decoration-line-through text-muted">$559,800</span></p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal1">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="card-img-top product-img" alt="REACH Trail Master">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH Trail Master</h5>
+                                <p class="card-text text-danger fw-bold">$329,900</p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal2">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <span class="sale-badge">30%</span>
+                            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" class="card-img-top product-img" alt="REACH Dunk Pro">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH Dunk Pro</h5>
+                                <p class="card-text text-danger fw-bold">$269,900 <span class="text-decoration-line-through text-muted">$389,900</span></p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal3">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 4 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" class="card-img-top product-img" alt="REACH TrainX">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH TrainX</h5>
+                                <p class="card-text text-danger fw-bold">$199,900</p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal4">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 5 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" class="card-img-top product-img" alt="REACH Street">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH Street</h5>
+                                <p class="card-text text-danger fw-bold">$259,900</p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal5">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 6 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card product-card">
+                            <span class="sale-badge">25%</span>
+                            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" class="card-img-top product-img" alt="REACH Street">
+                            <div class="card-body">
+                                <h5 class="card-title">REACH Street Pro</h5>
+                                <p class="card-text text-danger fw-bold">$229,900 <span class="text-decoration-line-through text-muted">$309,900</span></p>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#productModal6">Ver detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+ 
+            </div>
+            <!-- Modales para los productos -->
+        <!-- Modal Producto 1 -->
+<div class="modal fade" id="productModal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">REACH Run Pro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=1365&q=80" alt="REACH Run Pro" class="img-fluid" />
+          </div>
+          <div class="col-md-6">
+            <h4>REACH Run Pro</h4>
+            <p class="text-danger fw-bold fs-4">$279,900</p>
+            <p>Zapatillas de running de alto rendimiento con tecnología REACH Air.</p>
+            <ul>
+                            <li>Material: Cuero sintético REACH Pro</li>
+                            <li>Suela: REACH Court Grip para canchas</li>
+                            <li>Amortiguación: REACH Bounce para saltos</li>
+                            <li>Colores disponibles: Negro/Rojo, Blanco/Azul</li>
+                            <li>Tallas: 38-46</li>
+                            <li>Peso: 420g (talla 42)</li>
+                        </ul>
+            <div class="mb-3">
+              <label for="productQuantity1" class="form-label">Cantidad</label>
+              <input type="number" class="form-control product-quantity" id="productQuantity1" min="1" value="1" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger add-to-cart-btn"
+              data-product-name="REACH Run Pro"
+              data-product-price="279900"
+              data-product-img="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&auto=format&fit=crop&w=1365&q=80"
+              data-product-desc="Zapatillas de running de alto rendimiento con tecnología REACH Air."
+              data-quantity-input-id="productQuantity1"
+            >Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Producto 2 -->
+<div class="modal fade" id="productModal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">REACH Trail Master</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="REACH Trail Master" class="img-fluid" />
+          </div>
+          <div class="col-md-6">
+            <h4>REACH Trail Master</h4>
+            <p class="text-danger fw-bold fs-4">$329,900</p>
+            <p>Zapatillas diseñadas para trail running con excelente agarre.</p>
+            <ul>
+                            <li>Material: Cuero sintético REACH Pro</li>
+                            <li>Suela: REACH Court Grip para canchas</li>
+                            <li>Amortiguación: REACH Bounce para saltos</li>
+                            <li>Colores disponibles: Negro/Rojo, Blanco/Azul</li>
+                            <li>Tallas: 38-46</li>
+                            <li>Peso: 420g (talla 42)</li>
+                        </ul>
+            <div class="mb-3">
+              <label for="productQuantity2" class="form-label">Cantidad</label>
+              <input type="number" class="form-control product-quantity" id="productQuantity2" min="1" value="1" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger add-to-cart-btn"
+              data-product-name="REACH Trail Master"
+              data-product-price="329900"
+              data-product-img="https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80"
+              data-product-desc="Zapatillas diseñadas para trail running con excelente agarre."
+              data-quantity-input-id="productQuantity2"
+            >Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Producto 3 -->
+<div class="modal fade" id="productModal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">REACH Dunk Pro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" class="img-fluid" alt="REACH Dunk Pro">
+          </div>
+          <div class="col-md-6">
+            <h4>REACH Dunk Pro</h4>
+            <p class="text-danger fw-bold fs-4">$269,900</p>
+            <p>Zapatillas diseñadas para el baloncesto con soporte y amortiguación avanzada.</p>
+            <ul>
+              <li>Material: Cuero sintético REACH Pro</li>
+              <li>Suela: REACH Court Grip para canchas</li>
+              <li>Amortiguación: REACH Bounce para saltos</li>
+              <li>Colores disponibles: Negro/Rojo, Blanco/Azul</li>
+              <li>Tallas: 38-46</li>
+              <li>Peso: 420g (talla 42)</li>
+            </ul>
+            <div class="mb-3">
+              <label for="productQuantity3" class="form-label">Cantidad</label>
+              <input type="number" class="form-control product-quantity" id="productQuantity3" min="1" value="1" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger add-to-cart-btn"
+              data-product-name="REACH Dunk Pro"
+              data-product-price="269900"
+              data-product-img="https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80"
+              data-product-desc="Zapatillas diseñadas para el baloncesto con soporte y amortiguación avanzada."
+              data-quantity-input-id="productQuantity3"
+            >Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Producto 4 -->
+<div class="modal fade" id="productModal4" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">REACH TrainX</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixlib=rb-4.0.3&auto=format&fit=crop&w=715&q=80" class="img-fluid" alt="REACH TrainX">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>REACH TrainX</h4>
+                        <p class="text-danger fw-bold fs-4">$199,900</p>
+                        <p>Zapatillas versátiles para entrenamiento cruzado con estabilidad lateral y flexibilidad multidireccional.</p>
+                        <ul>
+                            <li>Material: Malla REACH Flex con refuerzos</li>
+                            <li>Suela: REACH Cross para múltiples superficies</li>
+                            <li>Amortiguación: REACH Response para movimientos rápidos</li>
+                            <li>Colores disponibles: Negro, Gris/Rojo, Azul Marino</li>
+                            <li>Tallas: 36-44</li>
+                            <li>Peso: 290g (talla 42)</li>
+                        </ul>
+                        <div class="mb-3">
+                            <label for="productQuantity4" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control product-quantity" id="productQuantity4" min="1" value="1" />
+                        </div>
+                         <button
+                          type="button"
+                          class="btn btn-danger add-to-cart-btn"
+                          data-product-name="REACH TrainX"
+                          data-product-price="199900"
+                          data-product-img="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixlib=rb-4.0.3&auto=format&fit=crop&w=715&q=80"
+                          data-product-desc="Zapatillas versátiles para entrenamiento cruzado con estabilidad lateral y flexibilidad multidireccional."
+                          data-quantity-input-id="productQuantity4"
+                        >Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Producto 5 -->
+<div class="modal fade" id="productModal5" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">REACH Run Femme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=764&q=80" class="img-fluid" alt="REACH Run Femme">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>REACH Run Femme</h4>
+                        <p class="text-danger fw-bold fs-4">$259,900</p>
+                        <p>Zapatillas de running diseñadas específicamente para la biomecánica femenina, con ajuste perfecto y estilo.</p>
+                        <ul>
+                            <li>Material: Malla REACH Femme Fit</li>
+                            <li>Suela: REACH Women's Grip</li>
+                            <li>Amortiguación: REACH Air Light</li>
+                            <li>Colores disponibles: Rosa/Blanco, Morado/Negro, Turquesa</li>
+                            <li>Tallas: 34-40</li>
+                            <li>Peso: 220g (talla 38)</li>
+                        </ul>
+                        <div class="mb-3">
+                            <label for="productQuantity5" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control product-quantity" id="productQuantity5" min="1" value="1" />
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-danger add-to-cart-btn"
+                          data-product-name="REACH Run Femme"
+                          data-product-price="259900"
+                          data-product-img="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=764&q=80"
+                          data-product-desc="Zapatillas de running diseñadas específicamente para la biomecánica femenina, con ajuste perfecto y estilo."
+                          data-quantity-input-id="productQuantity5"
+                        >Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Producto 6 -->
+<div class="modal fade" id="productModal6" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">REACH Street</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=1025&q=80" class="img-fluid" alt="REACH Street">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>REACH Street</h4>
+                        <p class="text-danger fw-bold fs-4">$229,900 <span class="text-decoration-line-through text-muted fs-6">$309,900</span></p>
+                        <p>Zapatillas urbanas con estilo deportivo, perfectas para el día a día con comodidad premium.</p>
+                        <ul>
+                            <li>Material: Cuero sintético REACH Urban</li>
+                            <li>Suela: REACH Street Comfort</li>
+                            <li>Amortiguación: REACH Everyday</li>
+                            <li>Colores disponibles: Blanco, Negro, Gris, Azul</li>
+                            <li>Tallas: 36-44</li>
+                            <li>Peso: 270g (talla 42)</li>
+                        </ul>
+                        <div class="mb-3">
+                            <label for="productQuantity6" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control product-quantity" id="productQuantity6" min="1" value="1" />
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-danger add-to-cart-btn"
+                          data-product-name="REACH Street"
+                          data-product-price="229900"
+                          data-product-img="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=1025&q=80"
+                          data-product-desc="Zapatillas urbanas con estilo deportivo, perfectas para el día a día con comodidad premium."
+                          data-quantity-input-id="productQuantity6"
+                        >Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        <!-- Sección de newsletter -->
+        <section class="newsletter rounded">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <h2>¡Suscríbete a nuestro boletín!</h2>
+                        <p class="lead">Recibe ofertas exclusivas en zapatos deportivos.</p>
+                        <form class="row g-3 justify-content-center">
+                            <div class="col-md-8">
+                                <input type="email" class="form-control form-control-lg" placeholder="Tu correo electrónico">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-danger btn-lg w-100">Suscribirse</button>
+                            </div>
+                        </form>
+                        <p class="mt-3 small">Al suscribirte aceptas nuestra <a href="#" class="text-decoration-none">Política de Privacidad</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start">
+                    <h5>REACH</h5>
+                    <p>Zapatos deportivos de alto rendimiento.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Síguenos</h5>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <h5>Contacto</h5>
+                    <p>contacto@reachshoes.com<br>+57 123 456 7890</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-12 text-center footer-links">
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contacto</a>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="small mb-0">&copy; 2025 REACH OFFICIAL STORE. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+     <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Selecciona todos los botones con la clase 'add-to-cart-btn'
+  const buttons = document.querySelectorAll('.add-to-cart-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Obtener datos desde atributos data-*
+      const name = button.getAttribute('data-product-name');
+      const price = parseInt(button.getAttribute('data-product-price'));
+      const img = button.getAttribute('data-product-img');
+      const desc = button.getAttribute('data-product-desc');
+      const qtyInputId = button.getAttribute('data-quantity-input-id');
+      let qty = 1;
+      if (qtyInputId) {
+        const qtyInput = document.getElementById(qtyInputId);
+        if (qtyInput) {
+          qty = parseInt(qtyInput.value);
+          if (isNaN(qty) || qty < 1) qty = 1;
+        }
+      }
+      // Obtener carrito actual desde localStorage
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const index = cart.findIndex(item => item.id === name);
+      if (index > -1) {
+        cart[index].quantity += qty;
+      } else {
+        cart.push({ id: name, price, img, desc, quantity: qty });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      // Cerrar modal usando Bootstrap API
+      const modalElem = button.closest('.modal');
+      const modalInstance = bootstrap.Modal.getInstance(modalElem);
+      if (modalInstance) modalInstance.hide();
+      alert(`"${name}" añadido al carrito (${qty} unidad(es))`);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
